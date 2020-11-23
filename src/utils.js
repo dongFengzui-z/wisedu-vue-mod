@@ -37,8 +37,24 @@ export const Post = (url, data = null, config = {}) => {
       method: 'post',
       url: getApi(url),
       data: data,
-      ...config
+      ...config,
+      transformRequest: [
+        function(data) {
+          // Do whatever you want to transform the data
+          let ret = "";
+          for (let it in data) {
+            ret +=
+              encodeURIComponent(it) + "=" + encodeURIComponent(data[it]) + "&";
+          }
+          return ret;
+        }
+      ],
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
       // adapter: config.mockFlag ? () => MOCK_DATA[config.mock] : null
+  }).then(res=>{
+    return res.data;
   })
 }
 
@@ -70,6 +86,8 @@ export const Get = (url, data = null, config = {}) => {
       url: getApi(url),
       params: data,
       ...config
+    }).then(res =>{
+      return res.data;
     })
 //   }
 }
