@@ -73,3 +73,52 @@ export const Get = (url, data = null, config = {}) => {
     })
 //   }
 }
+
+
+/**
+ * 防抖
+ * @param {*} fn
+ * @param {*} delay
+ */
+export const debounce = (fn, delay) => {
+  let timer = null;
+  return function() {
+    let args = arguments;
+    let context = this;
+    if (timer) {
+      clearTimeout(timer);
+      timer = setTimeout(function() {
+        fn.apply(context, args);
+      }, delay);
+    } else {
+      timer = setTimeout(function() {
+        fn.apply(context, args);
+      }, delay);
+    }
+  };
+};
+
+/**
+ * 格式化日期
+ * @param {*} date
+ */
+export const formatDate = date => {
+  const y = date.getFullYear();
+  let m = date.getMonth() + 1;
+  m = m < 10 ? "0" + m : m;
+  let d = date.getDate();
+  d = d < 10 ? "0" + d : d;
+  return y + "-" + m + "-" + d;
+};
+export const formatTimeDate = date => {
+  const y = date.getFullYear();
+  let M = date.getMonth() + 1;
+  M = M < 10 ? "0" + M : M;
+  let d = date.getDate();
+  d = d < 10 ? "0" + d : d;
+  let h = date.getHours();
+  h = h < 10 ? "0" + h : h;
+  let m = date.getMinutes();
+  m = m <10 ?  "0" + m : m;
+  return y + "-" + M + "-" + d +" "+ h +':' + m;
+}

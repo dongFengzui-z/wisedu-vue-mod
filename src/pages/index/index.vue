@@ -1,6 +1,6 @@
 <template>
     <div class="index-page">
-        <div class="page" ml5 mt12>我是首页</div>
+        <div class="page" ml5 mt12>我是首页 <span class="iconfont icon-xiala1"></span></div>
     </div>
 </template>
 <script>
